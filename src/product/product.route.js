@@ -1,5 +1,6 @@
 import express from 'express';
 import productcontroller from './product.controller.js';
+import { upload } from '../middleware/multer.js';
 
 const router=express.Router();
 
@@ -12,10 +13,13 @@ const abc=new productcontroller();
 
 
 router.get("/",abc.getallproduct)
-router.post()
 
 
+// post req to a server with a multer middleware
+router.post('/', upload.single('imageUrl'), abc.addproduct)
 
+
+router.get('/:id',abc.getoneproduct)
 
 
 export default router

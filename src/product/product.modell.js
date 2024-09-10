@@ -21,6 +21,25 @@ export default class productmodell{
 
         return products
     }
+
+
+    static getone(id){
+      const find=products.find((v)=>v.id==id);
+      return find;
+
+    }
+
+
+    static addproduct(newproduct){
+
+    newproduct.id=products.length+1;
+
+    products.push(newproduct);
+    return products;
+
+
+
+    }
         
     }
 
