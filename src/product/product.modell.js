@@ -1,3 +1,5 @@
+import usermodell from "../user/user.modell.js";
+
 export default class productmodell{
 
 
@@ -36,14 +38,85 @@ export default class productmodell{
 
     products.push(newproduct);
     return products;
-
-
-
-    }
-        
     }
 
+// rate a product
 
+static rateproduct(userid,productid,rating){
+
+  // 1 vallidate user and product
+  
+  const user = usermodell.get().find((u)=>u.id==userid)
+  
+  if(!user){
+    return 'user not found'
+  }
+  
+  
+  
+  
+  // 2 vallidate product
+  const product=products.find((u)=>u.id==productid)
+  
+  if(!product){
+    return 'product not found'
+  }
+  
+  
+  
+  // check if there is any existing rating 
+  
+  if(!product.ratings){
+  
+  product.ratings=[];
+  product.ratings.push=({
+  
+  userid:userid,
+  rating:rating
+  
+  })
+  
+  }
+  
+  
+  else {
+  
+    // check if user rationg is already available for that praticaular product
+  
+  const existingratingindex   =  product.ratings.findIndex((u)=>u.userid==userid)
+  
+  // nhi toh -1 AEGA AGR NHI HOGI RATINGE PAHLE SE TOH YE UPDATE KREGA
+  if(existingratingindex>=0){
+  
+  product.ratings[existingratingindex]={
+  
+  userid:userid,
+  rating:rating
+  
+  }
+  
+  }
+  
+  else{
+    product.ratings.push({
+      userid:userid,
+      rating:rating
+  
+    })
+  }
+  
+  
+  }
+  
+     
+  
+
+
+
+   
+    }
+
+  }
 var products = [
     new productmodell(
       1,

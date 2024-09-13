@@ -10,12 +10,7 @@ getallproduct(req,res){
 
     const product=productmodell.getall()
     res.send(product)
-
-
 }
-
-
-
  
 // to add a product in a array later we will add a database
 addproduct(req,res){
@@ -40,7 +35,20 @@ res.send(result);
 
  
 
-rateproduct(req,res){}
+rateproduct(req,res){
+const userid=req.query.userid
+const productid=req.query.productid
+const rating=req.query.rating
+
+const error = productmodell.rateproduct(userid,productid,rating)
+if(error){
+
+    return  res.send(error)
+}
+else{
+    return res.send("rating done")
+}
+}
  
 
 

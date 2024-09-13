@@ -21,5 +21,7 @@ router.post('/', upload.single('imageUrl'), abc.addproduct)
 
 router.get('/:id',abc.getoneproduct)
 
+router.post('/rate',abc.rateproduct)
+
 
 export default router
