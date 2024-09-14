@@ -20,7 +20,7 @@ try{
 
     const payload=jwt.verify(token,"aasdFGHJ23DFG567fgh345678dfgdfE")
 
-    req.userid= payload.userID;
+    req.userid = payload.userID;
     console.log(payload);
 
 }

@@ -1,0 +1,12 @@
+
+
+
+
+1  A preflight request is an OPTIONS request sent by the browser to check whether a cross-origin request is permitted.
+   A preflight response is the server's answer, containing headers that specify whether the request is allowed.
+   Preflight checks are necessary for "non-simple" requests to ensure the safety of cross-origin requests.
+
+
+
+
+
