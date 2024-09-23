@@ -2,8 +2,10 @@ import express from 'express';
 import router from './src/product/product.route.js';
 import userrouter from './src/user/user.routes.js';
 import jwtauth from './src/middleware/jwt.middleware.js';
+import {connectmongodb} from "./src/config/mongodb.js";
 import cartroute from './src/cart/cart.routes.js';
 import cors from 'cors'
+
 
 const server=express()
 
@@ -11,7 +13,7 @@ const server=express()
 server.use(express.json()); // For parsing application/json
 
 // routes
-server.use("/api/products",jwtauth,router)
+server.use("/api/products",router)
 server.use("/api/user",userrouter)
 server.use("/api/cart",jwtauth,cartroute);
 
@@ -46,6 +48,6 @@ server.get("/",(req,res)=>{
 
 
 
-server.listen(3000)
+server.listen(3000,connectmongodb())
 
 console.log("server is listening")

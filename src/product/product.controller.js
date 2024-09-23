@@ -1,30 +1,40 @@
 
 import productmodell from "./product.modell.js";
+import productrepository from "./product.repository.js";
 
 export default class productcontroller{
+
+// database
+constructor(){
+    this.productrepository=new productrepository()
+}
+
+
 
 
 // this is used to get the product
 getallproduct(req,res){
 
 
-    const product=productmodell.getall()
+    const product=this.productrepository.getall()
     res.send(product)
 }
  
+
+
+
+
+
 // to add a product in a array later we will add a database
-addproduct(req,res){
+async addproduct(req,res){
 
 const{name,price,sizes}= req.body;
 
-const newproduct={
-name,
-price:parseFloat(price),
-sizes: sizes.split(','),
-imageUrl:req.file.filename,
-}
+const newproduct=new productmodell(name ,null, parseFloat(price) , req.file.filename,null, sizes.split(','))
 
-const result=productmodell.addproduct(newproduct);
+
+
+const result = await this.productrepository.add(newproduct);
 res.send(result);
 
 }
@@ -34,13 +44,14 @@ res.send(result);
 
 
  
+// 3
+async rateproduct(req,res){
+    
+const userid=req.body.userid
+const productid=req.body.productid
+const rating=req.body.rating
 
-rateproduct(req,res){
-const userid=req.query.userid
-const productid=req.query.productid
-const rating=req.query.rating
-
-const error = productmodell.rateproduct(userid,productid,rating)
+const error = await this.productrepository.rate(userid,productid,rating)
 if(error){
 
     return  res.send(error)
@@ -58,11 +69,16 @@ else{
 
 
 
-getoneproduct(req,res){
+ async getoneproduct(req,res){
+try{
+    const id=req.params.id;
+    const result= await this.productrepository.get(id)
+    return res.send(result);
+}
 
-const id=req.params.id;
-const result=productmodell.getone(id)
- return res.send(result);
+catch(err){
+console.log(err)
+}
 
 }
  

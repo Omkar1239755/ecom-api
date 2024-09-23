@@ -10,7 +10,7 @@ const token =req.headers["authorization"]
 
 if(!token){
 
-    return req.status(401).send("unauthorised user")
+    return req.send("unauthorised user")
 }
 
 // check if token is vallid
@@ -21,6 +21,7 @@ try{
     const payload=jwt.verify(token,"aasdFGHJ23DFG567fgh345678dfgdfE")
 
     req.userid = payload.userID;
+    console.log(req.userid)
     console.log(payload);
 
 }

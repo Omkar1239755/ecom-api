@@ -8,5 +8,15 @@
 
 
 
+2. A logger is a tool or mechanism used in programming to track and record the behavior of an application during its execution. 
+   Loggers help developers by capturing useful information, such as error messages, warnings, and general activity, in order to debug issues, monitor system behavior, or even perform auditing.
+   example is winston and morgan
 
 
+3.MongoClient.connect is an asynchronous method that attempts to establish a connection to a MongoDB database. The url parameter is the connection string that specifies where the MongoDB server
+  is hosted (usually includes the database name, server address, and credentials).
+
+
+
+  4. Static properties and methods belong to the class itself and do not need to be initialized in the constructor.
+Instance properties and methods belong to an individual instance of the class and should be initialized inside the constructor using this.

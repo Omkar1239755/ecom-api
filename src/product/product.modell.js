@@ -4,9 +4,8 @@ export default class productmodell{
 
 
 
-    constructor(id,name,desc,price,imageUrl,category,sizes){
+    constructor(name,desc,price,imageUrl,category,sizes,id){
 
-        this.id=id;
         this.name=name;
         this.desc=desc;
         this.price=price;
@@ -14,99 +13,100 @@ export default class productmodell{
         this.category=category;
         this.sizes=sizes;
         
+        this._id=id;
         
 
     }
 
 
-    static getall(){
+    // static getall(){
 
-        return products
-    }
-
-
-    static getone(id){
-      const find=products.find((v)=>v.id==id);
-      return find;
-
-    }
+    //     return products
+    // }
 
 
-    static addproduct(newproduct){
+    // static getone(id){
+    //   const find=products.find((v)=>v.id==id);
+    //   return find;
 
-    newproduct.id=products.length+1;
+    // }
 
-    products.push(newproduct);
-    return products;
-    }
+
+    // static addproduct(newproduct){
+
+    // newproduct.id=products.length+1;
+
+    // products.push(newproduct);
+    // return products;
+    // }
 
 // rate a product
 
-static rateproduct(userid,productid,rating){
+// static rateproduct(userid,productid,rating){
 
-  // 1 vallidate user and product
+//   // 1 vallidate user and product
   
-  const user = usermodell.get().find((u)=>u.id==userid)
+//   const user = usermodell.get().find((u)=>u.id==userid)
   
-  if(!user){
-    return 'user not found'
-  }
-  
-  
-  
-  
-  // 2 vallidate product
-  const product=products.find((u)=>u.id==productid)
-  
-  if(!product){
-    return 'product not found'
-  }
+//   if(!user){
+//     return 'user not found'
+//   }
   
   
   
-  // check if there is any existing rating 
   
-  if(!product.ratings){
+//   // 2 vallidate product
+//   const product=products.find((u)=>u.id==productid)
   
-  product.ratings=[];
-  product.ratings.push=({
-  
-  userid:userid,
-  rating:rating
-  
-  })
-  
-  }
+//   if(!product){
+//     return 'product not found'
+//   }
   
   
-  else {
   
-    // check if user rationg is already available for that praticaular product
+//   // check if there is any existing rating 
   
-  const existingratingindex   =  product.ratings.findIndex((u)=>u.userid==userid)
+//   if(!product.ratings){
   
-  // nhi toh -1 AEGA AGR NHI HOGI RATINGE PAHLE SE TOH YE UPDATE KREGA
-  if(existingratingindex>=0){
+//   product.ratings=[];
+//   product.ratings.push=({
   
-  product.ratings[existingratingindex]={
+//   userid:userid,
+//   rating:rating
   
-  userid:userid,
-  rating:rating
+//   })
   
-  }
-  
-  }
-  
-  else{
-    product.ratings.push({
-      userid:userid,
-      rating:rating
-  
-    })
-  }
+//   }
   
   
-  }
+//   else {
+  
+//     // check if user rationg is already available for that praticaular product
+  
+//   const existingratingindex   =  product.ratings.findIndex((u)=>u.userid==userid)
+  
+//   // nhi toh -1 AEGA AGR NHI HOGI RATINGE PAHLE SE TOH YE UPDATE KREGA
+//   if(existingratingindex>=0){
+  
+//   product.ratings[existingratingindex]={
+  
+//   userid:userid,
+//   rating:rating
+  
+//   }
+  
+//   }
+  
+//   else{
+//     product.ratings.push({
+//       userid:userid,
+//       rating:rating
+  
+//     })
+//   }
+  
+  
+  // }
   
      
   
@@ -116,7 +116,7 @@ static rateproduct(userid,productid,rating){
    
     }
 
-  }
+  // database aagya
 var products = [
     new productmodell(
       1,

@@ -16,12 +16,14 @@ router.get("/",abc.getallproduct)
 
 
 // post req to a server with a multer middleware
-router.post('/', upload.single('imageUrl'), abc.addproduct)
+router.post('/',   upload.single('imageUrl')  ,    (req,res)=>{abc.addproduct(req,res)} )
+
+// 2
+router.get('/:id', (req,res)=>{abc.getoneproduct(req,res)})
 
 
-router.get('/:id',abc.getoneproduct)
-
-router.post('/rate',abc.rateproduct)
+// 3
+router.post('/rate', (req,res)=>{abc.rateproduct(req,res)})
 
 
 export default router

@@ -1,18 +1,24 @@
 
 
 import usermodell from "./user.modell.js";
-
 import jwt from "jsonwebtoken"
-
+import userrepository from "./user.repository.js"
+import bcrypt from "bcrypt"
 
 
 export default  class usercontroller{
 
-singin(req,res){
+
+constructor(){
+    this.userrepository=new userrepository()
+}
+
+
+ async singin(req,res){
 
     const{email,password}=req.body
 
-    const result=usermodell.singin(email,password)
+    const result=  await this.userrepository.singinusingemail (email)
 
     if(!result){
 
@@ -20,25 +26,45 @@ singin(req,res){
     }
 
     else{
+        // compare the hashed passward
+        const ans=await bcrypt.compare(password,result.password)
+        if(!ans){
+            res.send("error")
+        }
+        else{
+            const token =jwt.sign({userid:result.id,email:result.email},"aasdFGHJ23DFG567fgh345678dfgdfE",{ expiresIn: '1h' })
 
-         // after checking the creddentiall serversending token to client 
+            res.send(token)
+        
 
-        const token =jwt.sign({userid:result.id,email:result.email},"aasdFGHJ23DFG567fgh345678dfgdfE",{ expiresIn: '1h' })
+        }
 
-        res.send(token)
+      
     
     }
 
 }
 
 
-singup(req,res){
+ async singup(req,res){
     
     const {name,email,password,type}=req.body
+
+
+    const hashpass=  await bcrypt.hash(password,12)
+    // pass hash ki
+
+
+    const user =new usermodell(
+        name,
+        email
+        ,hashpass,type
+    )
     
-    const view =usermodell.singup(name,email,password,type)
-    console.log(view)
-    res.send(view)
+  await this.userrepository.singup(user)
+
+console.log(user)
+    res.send(user)
     
     
     }

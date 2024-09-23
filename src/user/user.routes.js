@@ -6,10 +6,10 @@ const userrouter=express.Router()
 
 const abc= new usercontroller();
 
-userrouter.post("/singup",abc.singup)
+userrouter.post('/singup',(req,res)=>{abc.singup(req,res)})
 // database ke funda se hua method alag
 
-userrouter.post("/singin",abc.singin)
+userrouter.post('/singin',(req,res)=>{abc.singin(req,res)})
 
 
 
